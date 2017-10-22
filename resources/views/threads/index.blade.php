@@ -4,11 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Forum Threads</div>
+                @foreach ($threads as $thread)
 
-                    <div class="panel-body">
-                        @foreach ($threads as $thread)
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Forum Threads</div>
+
+                        <div class="panel-body">
                             <article>
                                 <div class="level">
                                     <h4 class="flex">
@@ -22,14 +23,13 @@
                                     </a>
                                 </div>
 
-
                                 <div class="body">{{ $thread->body }}</div>
                             </article>
 
                             <hr>
-                        @endforeach
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
