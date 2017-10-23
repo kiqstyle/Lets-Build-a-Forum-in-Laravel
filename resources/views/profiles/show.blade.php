@@ -2,32 +2,21 @@
 
 @section('content')
     <div class="container">
-        <div class="page-header">
-            <h1>
-                {{ $profileUser->name }}
-                <small>since {{ $profileUser->created_at->diffForHumans() }}</small>
-            </h1>
-        </div>
-
-        @foreach ($threads as $thread)
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="level">
-                        <span class="flex">
-                            <a href="/profiles/{{ $thread->user_id }}">{{ $thread->creator->name }}</a> posted:
-                            <a href="{{ $thread->path() }}"></a>{{ $thread->title }}
-                        </span>
-
-                        <span>{{ $thread->created_at->diffForHumans() }}</span>
-                    </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="page-header">
+                    <h1>
+                        {{ $profileUser->name }}
+                    </h1>
                 </div>
 
-                <div class="panel-body">
-                    {{ $thread->body }}
-                </div>
+                @foreach ($activities as $date => $activity)
+                    <h3 class="page-header">{{ $date }}</h3>
+                    @foreach ($activity as $record)
+                        @include ("profiles.activities.{$record->type}", ['activity' => $record])
+                    @endforeach
+                @endforeach
             </div>
-        @endforeach
-
-        {{ $threads->links() }}
+        </div>
     </div>
 @endsection
